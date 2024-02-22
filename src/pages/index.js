@@ -2,10 +2,40 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { useState, useEffect } from 'react';
+import io from 'socket.io-client';
+import ChatComponent from "./components/Chat";
+
+const socket = io();
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
+  // const [messages, setMessages] = useState([]);
+  // const [input, setInput] = useState('');
+
+  // useEffect(() => {
+  //   // Listen for incoming messages
+  //   socket.on('message', (message) => {
+  //     setMessages((prevMessages) => [...prevMessages, message]);
+  //   });
+
+  //   // Clean up the socket connection when the component unmounts
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
+
+  // const sendMessage = () => {
+  //   if (input.trim() !== '') {
+  //     // Send the message to the server
+  //     socket.emit('message', { text: input, timestamp: new Date().toISOString() });
+  //     setInput('');
+  //   }
+  // };
+
+
   return (
     <>
       <Head>
@@ -16,98 +46,19 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
+          <ChatComponent />
         </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+        {/* <h1>Chat App</h1>
+        <div>
+          {messages.map((message, index) => (
+            <div key={index}>{`${message.text} - ${message.timestamp}`}</div>
+          ))}
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+        <div>
+          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+          <button onClick={sendMessage}>Send</button>
+        </div> */}
       </main>
     </>
   );
